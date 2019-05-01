@@ -13,18 +13,18 @@ const knexConfig = {
 const db = knex(knexConfig);
 
 // Endpoints. CRUD.
-// Get.
+// Get. **Postman Tested: Working**
 router.get('/', (req, res) => {
     db('cohorts')
     .then(cohorts => {
         res.status(200).json(cohorts)
     })
     .catch(err => {
-        res.status(500).json({ err: err, message: "Error retrieving the cohorts data."})
+        res.status(500).json({ message: "Error retrieving the cohorts data."})
     })
 });
 
-// Get by ID.
+// Get by ID. **Postman Tested: Working**
 router.get('/:id', (req, res) => {
     db('cohorts')
     .where({ id: req.params.id })
@@ -37,11 +37,11 @@ router.get('/:id', (req, res) => {
         }
     })
     .catch(err => {
-        res.status(500).json({ err: err, message: "Error retrieving the specified cohort data."})
+        res.status(500).json({ message: "Error retrieving the specified cohort data."})
     })
 });
 
-// Get all students for the specified cohort ID.
+// Get all students for the specified cohort ID. **Postman Tested: Working**
 router.get('/:id/students', (req, res) => {
     db('cohorts')
     .where({ 'cohorts.id': req.params.id })
@@ -50,7 +50,7 @@ router.get('/:id/students', (req, res) => {
         res.status(200).json(students)
     })
     .catch(err => {
-        res.status(500).json({ err: err, message: "Error retrieving the specified cohort's students."})
+        res.status(500).json({ message: "Error retrieving the specified cohort's students."})
     })
 });
 
@@ -69,33 +69,33 @@ router.post('/', (req, res) => {
                     res.status(201).json(cohort)
                 })
                 .catch(err => {
-                    res.status(500).json({ err: err, message: "Error adding the new cohort."})
+                    res.status(500).json({ message: "Error adding the new cohort."})
                 })
         })
         .catch(err => {
-            res.status(500).json({ err: err, message: "Error adding the new cohort."})
+            res.status(500).json({ message: "Error adding the new cohort."})
         })
     }
 });
 
-// Update.
+// Update. **Postman Tested: **
 router.put('/:id', (req, res) => {
     db('cohorts')
     .where({ id: req.params.id })
     .update(req.body)
     .then(updates => {
         if(updates > 0) {
-            res.status(200).json({ message: `${updated} cohort successfully updated.`})
+            res.status(200).json({ message: `${updates} cohort successfully updated.`})
         } else {
             res.status(404).json({ message: "The specified cohort does not exist."})
         }
     })
     .catch(err => {
-        res.status(500).json({ err: err, message: "Error updating this cohort."})
+        res.status(500).json({ message: "Error updating this cohort."})
     })
 });
 
-// Delete.
+// Delete. **Postman Tested: Working**
 router.delete('/:id', (req, res) => {
     db('cohorts')
     .where({ id: req.params.id })
@@ -108,7 +108,7 @@ router.delete('/:id', (req, res) => {
         }
     })
     .catch(err => {
-        res.status(500).json({ err: err, message: "Error deleting this cohort."})
+        res.status(500).json({ message: "Error deleting this cohort."})
     })
 })
 

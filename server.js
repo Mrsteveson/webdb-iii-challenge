@@ -8,7 +8,7 @@ const cohortsRouter = require('./cohorts/cohorts-router.js');
 server.use(helmet());
 server.use(express.json());
 // Use Router
-server.use('api/cohorts', cohortsRouter)
+server.use('/api/cohorts', cohortsRouter)
 
 // Hello msg
 server.get('/', (req, res) => {
