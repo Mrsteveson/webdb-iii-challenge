@@ -8,6 +8,7 @@ const knexConfig = {
       filename: './data/lambda.sqlite3'
     },
     useNullAsDefault: true,
+    // include debug: true, so helpful.
     debug: true
 };
 // use knex.
@@ -40,6 +41,7 @@ router.get('/:id', (req, res) => {
         )
     })
     .catch(err => {
+        // err.message gives actual helpful error messages instead of my custom messages.
         res.status(500).json(err.message)
     })
 });
@@ -68,7 +70,7 @@ router.post('/', (req, res) => {
     }
 });
 
-// Update. **Postman Tested: **
+// Update. **Postman Tested: working**
 router.put('/:id', (req, res) => {
     db('students')
     .where({ id: req.params.id })
@@ -85,7 +87,7 @@ router.put('/:id', (req, res) => {
     })
 });
 
-// Delete. **Postman Tested: **
+// Delete. **Postman Tested: working**
 router.delete('/:id', (req, res) => {
     db('students')
     .where({ id: req.params.id })
